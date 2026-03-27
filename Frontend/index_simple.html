@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Truck On Track</title>
+  <link rel="stylesheet" href="styles_simple.css">
+</head>
+<body>
+
+  <header>
+    <h1>Truck On Track</h1>
+    <p>Track truck income, expenses, and weekly profit</p>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>About This Website</h2>
+      <p>This website is for small trucking businesses. It helps keep truck numbers, weekly expenses, weekly income, and profit in one place.</p>
+    </section>
+
+    <section>
+      <h2>Add Truck</h2>
+      <form>
+        <label for="truckNumber">Truck Number</label>
+        <input type="text" id="truckNumber" name="truckNumber">
+
+        <button type="submit">Add Truck</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Weekly Expenses</h2>
+      <form>
+        <label for="expenseTruck">Truck</label>
+        <select id="expenseTruck" name="expenseTruck">
+          <option value="">Select Truck</option>
+          <option>Truck 101</option>
+          <option>Truck 202</option>
+          <option>Truck 303</option>
+        </select>
+
+        <label for="expenseWeek">Week</label>
+        <input type="week" id="expenseWeek" name="expenseWeek">
+
+        <label for="fuelCost">Fuel Cost</label>
+        <input type="number" id="fuelCost" name="fuelCost" step="0.01$">
+
+        <label for="repairCost">Repair Cost</label>
+        <input type="number" id="repairCost" name="repairCost" step="0.01">
+
+        <label for="tolls">Tolls</label>
+        <input type="number" id="tolls" name="tolls" step="0.01">
+
+        <label for="insurance">Insurance</label>
+        <input type="number" id="insurance" name="insurance" step="0.01">
+
+        <label for="driverPay">Driver Pay</label>
+        <input type="number" id="driverPay" name="driverPay" step="0.01">
+
+        <label for="otherExpenses">Other Expenses</label>
+        <input type="number" id="otherExpenses" name="otherExpenses" step="0.01">
+
+        <button type="submit">Save Expenses</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Weekly Income</h2>
+      <form>
+        <label for="incomeTruck">Truck</label>
+        <select id="incomeTruck" name="incomeTruck">
+          <option value="">Select Truck</option>
+          <option>Truck 101</option>
+          <option>Truck 202</option>
+          <option>Truck 303</option>
+        </select>
+
+        <label for="incomeWeek">Week</label>
+        <input type="week" id="incomeWeek" name="incomeWeek">
+
+        <label for="weeklyIncome">Weekly Income</label>
+        <input type="number" id="weeklyIncome" name="weeklyIncome" step="0.01">
+
+        <button type="submit">Save Income</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Weekly Summary</h2>
+
+      <label for="summaryTruck">Truck</label>
+      <select id="summaryTruck" name="summaryTruck">
+        <option value="">Select Truck</option>
+        <option>Truck 101</option>
+        <option>Truck 202</option>
+        <option>Truck 303</option>
+      </select>
+
+      <label for="summaryWeek">Week</label>
+      <input type="week" id="summaryWeek" name="summaryWeek">
+
+      <button type="button">View Summary</button>
+
+      <table>
+        <tr>
+          <th>Category</th>
+          <th>Amount</th>
+        </tr>
+        <tr>
+          <td>Fuel Cost</td>
+          <td>$0.00</td>
+        </tr>
+        <tr>
+          <td>Repair Cost</td>
+          <td>$0.00</td>
+        </tr>
+        <tr>
+          <td>Tolls</td>
+          <td>$0.00</td>
+        </tr>
+        <tr>
+          <td>Insurance</td>
+          <td>$0.00</td>
+        </tr>
+        <tr>
+          <td>Driver Pay</td>
+          <td>$0.00</td>
+        </tr>
+        <tr>
+          <td>Other Expenses</td>
+          <td>$0.00</td>
+        </tr>
+        <tr>
+          <td>Total Expenses</td>
+          <td>$0.00</td>
+        </tr>
+        <tr>
+          <td>Weekly Income</td>
+          <td>$0.00</td>
+        </tr>
+        <tr>
+          <td>Profit / Loss</td>
+          <td>$0.00</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>PDF Report</h2>
+      <form>
+        <label for="pdfTruck">Truck</label>
+        <select id="pdfTruck" name="pdfTruck">
+          <option value="">Select Truck</option>
+          <option>Truck 101</option>
+          <option>Truck 202</option>
+          <option>Truck 303</option>
+        </select>
+
+        <label for="pdfWeek">Week</label>
+        <input type="week" id="pdfWeek" name="pdfWeek">
+
+        <button type="button">Generate PDF</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Truck On Track 2026</p>
+  </footer>
+
+</body>
+</html>

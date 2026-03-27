@@ -1,0 +1,98 @@
+*{
+  box-sizing:border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-image: url("truck.jpg"); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  background-color: rgba(0, 0, 0, 0.4);
+  background-blend-mode: darken;
+
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 120px 20px;
+}
+
+
+header h1 {
+  font-size: 38px;
+  text-shadow: 3px 3px 8px rgba(0,0,0,0.8);
+}
+
+header p {
+  font-size: 18px;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+}
+
+main {
+  width: 80%;
+  margin: 20px auto;
+}
+
+section {
+  background: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+}
+
+h1, h2 {
+  margin-bottom: 10px;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+button {
+  background: linear-gradient(to right, #4475ad 50%, #1a3554 50%);
+  background-size: 200% 100%;
+  background-position: left;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  transition: background-position 0.3s ease;
+}
+
+button:hover {
+  background-position: right;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th, td {
+  border: 1px solid #999;
+  padding: 10px;
+  text-align: left;
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+}
