@@ -33,7 +33,6 @@
   </header>
 
   <main class="container">
-
     <section class="card intro-card">
       <div class="section-title-row">
         <h2>About This Website</h2>
@@ -43,6 +42,17 @@
         This website is for small trucking businesses. It helps keep truck numbers,
         weekly expenses, weekly income, and profit in one place.
       </p>
+    </section>
+    
+    <section class="card">
+      <div class="section-title-row">
+        <h2>Need Help?</h2>
+        <span class="section-tag">Support</span>
+      </div>
+
+      <p>If you have any issues, report a problem.</p>
+
+      <button onclick="goToReport()">Report a Problem</button>
     </section>
 
     <div class="grid-two">
@@ -254,6 +264,11 @@
         });
       });
     });
+  </script>
+  <script>
+  function goToReport() {
+  window.location.href = "report_full.html";
+    }
   </script>
 
 </body>
