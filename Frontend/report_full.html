@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report</title>
+<link rel="stylesheet" href="styles_simple.css">
+<link rel="stylesheet" href="report.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-overlay"></div>
+
+  <div class="top-bar">
+    <div class="brand-badge">TOT</div>
+
+    <label class="theme-switch">
+      <input type="checkbox" id="darkModeToggle">
+      <span class="theme-slider">
+        <span class="theme-icon moon">🌙</span>
+        <span class="theme-icon sun">☀️</span>
+      </span>
+    </label>
+  </div>
+
+  <div class="hero-content">
+    <h1>Report a Problem</h1>
+    <p>Tell us what went wrong</p>
+  </div>
+</header>
+
+<main class="container">
+
+<section class="card">
+  <div class="section-title-row">
+    <h2>Problem Form</h2>
+    <span class="section-tag">Support</span>
+  </div>
+
+  <form id="form" class="form-grid">
+
+    <div>
+      <label>Name</label>
+      <input type="text" id="name" required>
+    </div>
+
+    <div>
+      <label>Email</label>
+      <input type="email" id="email" required>
+    </div>
+
+    <div class="full-width">
+      <label>Title</label>
+      <input type="text" id="title" required>
+    </div>
+
+    <div class="full-width">
+      <label>Description</label>
+      <textarea id="desc" rows="5" required></textarea>
+    </div>
+
+    <div class="full-width">
+      <button type="submit" id="submitBtn">Submit</button>
+    </div>
+
+  </form>
+
+  <p id="msg" style="display:none; color:green; margin-top:10px;">Submitted</p>
+
+</section>
+
+<button class="back-btn" onclick="back()">Back</button>
+
+</main>
+
+<script>
+function back() {
+  window.location.href = "index_simple.html";
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const toggle = document.getElementById("darkModeToggle");
+
+  if (localStorage.getItem("darkMode") === "on") {
+    document.body.classList.add("dark-mode");
+    toggle.checked = true;
+  }
+
+  toggle.addEventListener("change", function () {
+    if (toggle.checked) {
+      document.body.classList.add("dark-mode");
+      localStorage.setItem("darkMode", "on");
+    } else {
+      document.body.classList.remove("dark-mode");
+      localStorage.setItem("darkMode", "off");
+    }
+  });
+
+  document.getElementById("form").addEventListener("submit", function(e){
+    e.preventDefault();
+    document.getElementById("msg").style.display = "block";
+    this.reset();
+  });
+});
+</script>
+
+</body>
+</html>
