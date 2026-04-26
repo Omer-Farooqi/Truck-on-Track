@@ -265,11 +265,53 @@
       });
     });
   </script>
+
   <script>
   function goToReport() {
   window.location.href = "report_full.html";
     }
   </script>
+
+<script>
+window.addEventListener("scroll", function () {
+  const y = window.scrollY;
+
+  const leftTruck = document.querySelector(".truck-left");
+  const rightTruck = document.querySelector(".truck-right");
+  const dashes = document.querySelectorAll(".road-dashes");
+
+  if (leftTruck) {
+    leftTruck.style.transform = "scaleY(-1) translateY(" + (y * 0.18) + "px)";
+  }
+
+  if (rightTruck) {
+    rightTruck.style.transform = "translateX(-50%) translateY(" + (y * -0.14) + "px)";
+  }
+
+  dashes.forEach(function(dash) {
+    dash.style.backgroundPosition = "center " + (y * 0.35) + "px";
+  });
+});
+</script>
+
+<div class="road-side road-left">
+  <div class="road-inner">
+    <div class="road-line road-line-left"></div>
+    <div class="road-line road-line-right"></div>
+    <div class="road-dashes"></div>
+    <img src="TRUCK1.png" class="road-truck truck-left">
+  </div>
+</div>
+
+<div class="road-side road-right">
+  <div class="road-inner">
+    <div class="road-line road-line-left"></div>
+    <div class="road-line road-line-right"></div>
+    <div class="road-dashes"></div>
+    <img src="TRUCK1.png" class="road-truck truck-right">
+  </div>
+</div>
+
 
 </body>
 </html>

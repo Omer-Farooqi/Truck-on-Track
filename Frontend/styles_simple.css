@@ -445,3 +445,155 @@ footer {
     margin-top: -38px;
   }
 }
+
+
+.hero,
+.container,
+footer {
+  position: relative;
+  z-index: 2;
+}
+
+.road-side {
+  position: fixed;
+  top: 0;
+  width: 350px;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.road-left {
+  left: 14px;
+}
+
+.road-right {
+  right: 14px;
+}
+
+.road-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, #2a2a2a 0%, #161616 45%, #262626 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.03),
+    inset 10px 0 18px rgba(255,255,255,0.02),
+    inset -10px 0 18px rgba(255,255,255,0.02),
+    0 0 20px rgba(0,0,0,0.12);
+  opacity: 0.92;
+}
+
+.road-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.018) 0px,
+      rgba(255,255,255,0.018) 3px,
+      transparent 3px,
+      transparent 10px
+    );
+  opacity: 0.14;
+}
+
+.road-line {
+  position: absolute;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: #b8932f;
+  opacity: 0.75;
+}
+
+.road-line-left {
+  left: 10px;
+}
+
+.road-line-right {
+  right: 10px;
+}
+
+.road-dashes {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 5px;
+  height: 100%;
+  transform: translateX(-50%);
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(245, 245, 245, 0.65) 0px,
+    rgba(245, 245, 245, 0.65) 30px,
+    transparent 30px,
+    transparent 76px
+  );
+  opacity: 0.55;
+}
+
+.road-truck {
+  position: absolute;
+  width: 300px;
+  height: auto;
+  filter: drop-shadow(0 12px 14px rgba(0,0,0,0.34));
+}
+
+.truck-left {
+  left: -50px;
+  top: 360px;
+  transform: scaleY(-1);
+}
+
+.truck-right {
+  right: -210px;
+  top: 360px;
+}
+
+body.dark-mode .road-inner {
+  background:
+    linear-gradient(180deg, #1c1c1c 0%, #0f0f0f 45%, #1a1a1a 100%);
+}
+
+body.dark-mode .road-line {
+  background: #9c7c28;
+  opacity: 0.68;
+}
+
+body.dark-mode .road-dashes {
+  opacity: 0.42;
+}
+
+@media (max-width: 1280px) {
+  .road-side {
+    width: 104px;
+  }
+
+  .road-truck {
+    width: 64px;
+  }
+
+  .truck-left {
+    left: 16px;
+  }
+
+  .truck-right {
+    right: 16px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .road-right {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .road-side {
+    display: none;
+  }
+}
