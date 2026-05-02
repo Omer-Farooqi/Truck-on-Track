@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Truck On Track</title>
+  <link rel="stylesheet" href="styles_simple.css">
+</head>
+<body>
+
+  <div class="page-glow glow-1"></div>
+  <div class="page-glow glow-2"></div>
+
+  <header class="hero">
+    <div class="hero-overlay"></div>
+
+    <div class="top-bar">
+      <div class="brand-badge">TOT</div>
+
+      <label class="theme-switch">
+        <input type="checkbox" id="darkModeToggle">
+        <span class="theme-slider">
+          <span class="theme-icon moon">🌙</span>
+          <span class="theme-icon sun">☀️</span>
+        </span>
+      </label>
+    </div>
+
+    <div class="hero-content">
+      <h1>Truck On Track</h1>
+      <p>Track truck income, expenses, and weekly profit in one clean place</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card intro-card">
+      <div class="section-title-row">
+        <h2>About This Website</h2>
+        <span class="section-tag">Overview</span>
+      </div>
+      <p>
+        This website is for small trucking businesses. It helps keep truck numbers,
+        weekly expenses, weekly income, and profit in one place.
+      </p>
+    </section>
+    
+    <section class="card">
+      <div class="section-title-row">
+        <h2>Need Help?</h2>
+        <span class="section-tag">Support</span>
+      </div>
+
+      <p>If you have any issues, report a problem.</p>
+
+      <button onclick="goToReport()">Report a Problem</button>
+    </section>
+
+    <div class="grid-two">
+
+      <section class="card">
+        <div class="section-title-row">
+          <h2>Add Truck</h2>
+          <span class="section-tag">Setup</span>
+        </div>
+
+        <form>
+          <label for="truckNumber">Truck Number</label>
+          <input type="text" id="truckNumber" name="truckNumber" placeholder="Enter truck number">
+
+          <button type="submit">Add Truck</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="section-title-row">
+          <h2>PDF Report</h2>
+          <span class="section-tag">Export</span>
+        </div>
+
+        <form>
+          <label for="pdfTruck">Truck</label>
+          <select id="pdfTruck" name="pdfTruck">
+            <option value="">Select Truck</option>
+            <option>Truck 101</option>
+            <option>Truck 202</option>
+            <option>Truck 303</option>
+          </select>
+
+          <label for="pdfWeek">Week</label>
+          <input type="week" id="pdfWeek" name="pdfWeek">
+
+          <button type="button">Generate PDF</button>
+        </form>
+      </section>
+
+    </div>
+
+    <section class="card">
+      <div class="section-title-row">
+        <h2>Weekly Expenses</h2>
+        <span class="section-tag">Expenses</span>
+      </div>
+
+      <form class="form-grid">
+        <div>
+          <label for="expenseTruck">Truck</label>
+          <select id="expenseTruck" name="expenseTruck">
+            <option value="">Select Truck</option>
+            <option>Truck 101</option>
+            <option>Truck 202</option>
+            <option>Truck 303</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="expenseWeek">Week</label>
+          <input type="week" id="expenseWeek" name="expenseWeek">
+        </div>
+
+        <div>
+          <label for="fuelCost">Fuel Cost</label>
+          <input type="number" id="fuelCost" name="fuelCost" step="0.01" placeholder="0.00">
+        </div>
+
+        <div>
+          <label for="repairCost">Repair Cost</label>
+          <input type="number" id="repairCost" name="repairCost" step="0.01" placeholder="0.00">
+        </div>
+
+        <div>
+          <label for="tolls">Tolls</label>
+          <input type="number" id="tolls" name="tolls" step="0.01" placeholder="0.00">
+        </div>
+
+        <div>
+          <label for="insurance">Insurance</label>
+          <input type="number" id="insurance" name="insurance" step="0.01" placeholder="0.00">
+        </div>
+
+        <div>
+          <label for="driverPay">Driver Pay</label>
+          <input type="number" id="driverPay" name="driverPay" step="0.01" placeholder="0.00">
+        </div>
+
+        <div>
+          <label for="otherExpenses">Other Expenses</label>
+          <input type="number" id="otherExpenses" name="otherExpenses" step="0.01" placeholder="0.00">
+        </div>
+
+        <div class="full-width">
+          <button type="submit">Save Expenses</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="section-title-row">
+        <h2>Weekly Income</h2>
+        <span class="section-tag">Income</span>
+      </div>
+
+      <form class="form-grid">
+        <div>
+          <label for="incomeTruck">Truck</label>
+          <select id="incomeTruck" name="incomeTruck">
+            <option value="">Select Truck</option>
+            <option>Truck 101</option>
+            <option>Truck 202</option>
+            <option>Truck 303</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="incomeWeek">Week</label>
+          <input type="week" id="incomeWeek" name="incomeWeek">
+        </div>
+
+        <div class="full-width">
+          <label for="weeklyIncome">Weekly Income</label>
+          <input type="number" id="weeklyIncome" name="weeklyIncome" step="0.01" placeholder="0.00">
+        </div>
+
+        <div class="full-width">
+          <button type="submit">Save Income</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="section-title-row">
+        <h2>Weekly Summary</h2>
+        <span class="section-tag">Report</span>
+      </div>
+
+      <div class="summary-controls">
+        <div>
+          <label for="summaryTruck">Truck</label>
+          <select id="summaryTruck" name="summaryTruck">
+            <option value="">Select Truck</option>
+            <option>Truck 101</option>
+            <option>Truck 202</option>
+            <option>Truck 303</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="summaryWeek">Week</label>
+          <input type="week" id="summaryWeek" name="summaryWeek">
+        </div>
+
+        <div class="summary-button-wrap">
+          <button type="button">View Summary</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Category</th>
+            <th>Amount</th>
+          </tr>
+          <tr><td>Fuel Cost</td><td>$0.00</td></tr>
+          <tr><td>Repair Cost</td><td>$0.00</td></tr>
+          <tr><td>Tolls</td><td>$0.00</td></tr>
+          <tr><td>Insurance</td><td>$0.00</td></tr>
+          <tr><td>Driver Pay</td><td>$0.00</td></tr>
+          <tr><td>Other Expenses</td><td>$0.00</td></tr>
+          <tr><td>Total Expenses</td><td>$0.00</td></tr>
+          <tr><td>Weekly Income</td><td>$0.00</td></tr>
+          <tr><td>Profit / Loss</td><td>$0.00</td></tr>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Truck On Track 2026</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggle = document.getElementById("darkModeToggle");
+
+      if (localStorage.getItem("darkMode") === "on") {
+        document.body.classList.add("dark-mode");
+        toggle.checked = true;
+      }
+
+      toggle.addEventListener("change", function () {
+        if (toggle.checked) {
+          document.body.classList.add("dark-mode");
+          localStorage.setItem("darkMode", "on");
+        } else {
+          document.body.classList.remove("dark-mode");
+          localStorage.setItem("darkMode", "off");
+        }
+      });
+
+      const forms = document.querySelectorAll("form");
+      forms.forEach(function(form) {
+        form.addEventListener("submit", function(e) {
+          e.preventDefault();
+        });
+      });
+    });
+  </script>
+
+  <script>
+  function goToReport() {
+  window.location.href = "report_full.html";
+    }
+  </script>
+
+<script>
+window.addEventListener("scroll", function () {
+  const y = window.scrollY;
+
+  const leftTruck = document.querySelector(".truck-left");
+  const rightTruck = document.querySelector(".truck-right");
+  const dashes = document.querySelectorAll(".road-dashes");
+
+  if (leftTruck) {
+    leftTruck.style.transform = "scaleY(-1) translateY(" + (y * 0.18) + "px)";
+  }
+
+  if (rightTruck) {
+  rightTruck.style.transform = "translateX(0) translateY(" + (y * -0.2) + "px)";
+}
+
+  dashes.forEach(function(dash) {
+    dash.style.backgroundPosition = "center " + (y * 0.35) + "px";
+  });
+});
+</script>
+
+<div class="road-side road-left">
+  <div class="road-inner">
+    <div class="road-line road-line-left"></div>
+    <div class="road-line road-line-right"></div>
+    <div class="road-dashes"></div>
+    <img src="TRUCK1.png" class="road-truck truck-left">
+  </div>
+</div>
+
+<div class="road-side road-right">
+  <div class="road-inner">
+    <div class="road-line road-line-left"></div>
+    <div class="road-line road-line-right"></div>
+    <div class="road-dashes"></div>
+    <img src="TRUCK1.png" class="road-truck truck-right">
+  </div>
+</div>
+
+
+</body>
+</html>
