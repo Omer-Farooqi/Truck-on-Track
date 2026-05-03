@@ -1,0 +1,30 @@
+textarea {
+  width: 100%;
+  padding: 14px 15px;
+  border-radius: 16px;
+  border: 1px solid var(--input-border);
+  background: var(--input);
+  color: var(--text);
+  outline: none;
+  font-family: inherit;
+}
+
+textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(76, 132, 222, 0.14);
+}
+
+.back-btn {
+  margin-top: 15px;
+  padding: 14px 18px;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  transform: translateY(-1px);
+}
