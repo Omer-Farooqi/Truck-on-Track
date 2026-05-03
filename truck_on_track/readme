@@ -1,0 +1,9 @@
+open cmd
+
+type in the following command: pip install -r requirements.txt
+
+once the required files are downloaded, 
+
+type in the following command: python app.py
+
+and the run the following in a browser: http://localhost:5000
