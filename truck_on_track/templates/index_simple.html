@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Truck On Track</title>
+  <link rel="stylesheet" href="/static/styles_simple.css">
+</head>
+<body>
+
+  <div class="page-glow glow-1"></div>
+  <div class="page-glow glow-2"></div>
+
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="top-bar">
+      <div class="brand-badge">TOT</div>
+      <label class="theme-switch">
+        <input type="checkbox" id="darkModeToggle">
+        <span class="theme-slider">
+          <span class="theme-icon moon">🌙</span>
+          <span class="theme-icon sun">☀️</span>
+        </span>
+      </label>
+    </div>
+    <div class="hero-content">
+      <h1>Truck On Track</h1>
+      <p>Track truck income, expenses, and weekly profit in one clean place</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="card intro-card">
+      <div class="section-title-row">
+        <h2>About This Website</h2>
+        <span class="section-tag">Overview</span>
+      </div>
+      <p>
+        This website is for small trucking businesses. It helps keep truck numbers,
+        weekly expenses, weekly income, and profit in one place.
+      </p>
+    </section>
+
+    <section class="card">
+      <div class="section-title-row">
+        <h2>Need Help?</h2>
+        <span class="section-tag">Support</span>
+      </div>
+      <p>If you have any issues, report a problem.</p>
+      <button onclick="window.location.href='/report'">Report a Problem</button>
+    </section>
+
+    <div class="grid-two">
+
+      <!-- Add Truck -->
+      <section class="card">
+        <div class="section-title-row">
+          <h2>Add Truck</h2>
+          <span class="section-tag">Setup</span>
+        </div>
+        <label for="truckNumber">Truck Number</label>
+        <input type="text" id="truckNumber" placeholder="e.g. 101">
+        <button onclick="addTruck()" style="margin-top:14px;">Add Truck</button>
+        <p id="addTruckMsg" class="form-msg"></p>
+      </section>
+
+      <!-- PDF Report -->
+      <section class="card">
+        <div class="section-title-row">
+          <h2>PDF Report</h2>
+          <span class="section-tag">Export</span>
+        </div>
+        <label for="pdfTruck">Truck</label>
+        <select id="pdfTruck"></select>
+        <label for="pdfWeek" style="margin-top:14px;">Week</label>
+        <input type="week" id="pdfWeek">
+        <button onclick="generatePDF()" style="margin-top:14px;">Generate PDF</button>
+        <p id="pdfMsg" class="form-msg"></p>
+      </section>
+
+    </div>
+
+    <!-- Weekly Expenses -->
+    <section class="card">
+      <div class="section-title-row">
+        <h2>Weekly Expenses</h2>
+        <span class="section-tag">Expenses</span>
+      </div>
+      <div class="form-grid">
+        <div>
+          <label for="expenseTruck">Truck</label>
+          <select id="expenseTruck"></select>
+        </div>
+        <div>
+          <label for="expenseWeek">Week</label>
+          <input type="week" id="expenseWeek">
+        </div>
+        <div>
+          <label for="fuelCost">Fuel Cost</label>
+          <input type="number" id="fuelCost" step="0.01" placeholder="0.00">
+        </div>
+        <div>
+          <label for="repairCost">Repair Cost</label>
+          <input type="number" id="repairCost" step="0.01" placeholder="0.00">
+        </div>
+        <div>
+          <label for="tolls">Tolls</label>
+          <input type="number" id="tolls" step="0.01" placeholder="0.00">
+        </div>
+        <div>
+          <label for="insurance">Insurance</label>
+          <input type="number" id="insurance" step="0.01" placeholder="0.00">
+        </div>
+        <div>
+          <label for="driverPay">Driver Pay</label>
+          <input type="number" id="driverPay" step="0.01" placeholder="0.00">
+        </div>
+        <div>
+          <label for="otherExpenses">Other Expenses</label>
+          <input type="number" id="otherExpenses" step="0.01" placeholder="0.00">
+        </div>
+        <div class="full-width">
+          <button onclick="saveExpenses()">Save Expenses</button>
+          <p id="expenseMsg" class="form-msg"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Weekly Income -->
+    <section class="card">
+      <div class="section-title-row">
+        <h2>Weekly Income</h2>
+        <span class="section-tag">Income</span>
+      </div>
+      <div class="form-grid">
+        <div>
+          <label for="incomeTruck">Truck</label>
+          <select id="incomeTruck"></select>
+        </div>
+        <div>
+          <label for="incomeWeek">Week</label>
+          <input type="week" id="incomeWeek">
+        </div>
+        <div class="full-width">
+          <label for="weeklyIncome">Weekly Income</label>
+          <input type="number" id="weeklyIncome" step="0.01" placeholder="0.00">
+        </div>
+        <div class="full-width">
+          <button onclick="saveIncome()">Save Income</button>
+          <p id="incomeMsg" class="form-msg"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Weekly Summary -->
+    <section class="card">
+      <div class="section-title-row">
+        <h2>Weekly Summary</h2>
+        <span class="section-tag">Report</span>
+      </div>
+      <div class="summary-controls">
+        <div>
+          <label for="summaryTruck">Truck</label>
+          <select id="summaryTruck"></select>
+        </div>
+        <div>
+          <label for="summaryWeek">Week</label>
+          <input type="week" id="summaryWeek">
+        </div>
+        <div class="summary-button-wrap">
+          <button onclick="viewSummary()">View Summary</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Category</th>
+            <th>Amount</th>
+          </tr>
+          <tr><td>Fuel Cost</td><td id="s-fuel">$0.00</td></tr>
+          <tr><td>Repair Cost</td><td id="s-repair">$0.00</td></tr>
+          <tr><td>Tolls</td><td id="s-tolls">$0.00</td></tr>
+          <tr><td>Insurance</td><td id="s-insurance">$0.00</td></tr>
+          <tr><td>Driver Pay</td><td id="s-driver_pay">$0.00</td></tr>
+          <tr><td>Other Expenses</td><td id="s-other">$0.00</td></tr>
+          <tr><td><strong>Total Expenses</strong></td><td id="s-total_expenses"><strong>$0.00</strong></td></tr>
+          <tr><td>Weekly Income</td><td id="s-income">$0.00</td></tr>
+          <tr><td><strong>Profit / Loss</strong></td><td id="s-profit"><strong>$0.00</strong></td></tr>
+        </table>
+      </div>
+      <p id="summaryMsg" class="form-msg"></p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Truck On Track 2026</p>
+  </footer>
+
+  <!-- Roads -->
+  <div class="road-side road-left">
+    <div class="road-inner">
+      <div class="road-line road-line-left"></div>
+      <div class="road-line road-line-right"></div>
+      <div class="road-dashes"></div>
+      <img src="/static/TRUCK1.png" class="road-truck truck-left">
+    </div>
+  </div>
+  <div class="road-side road-right">
+    <div class="road-inner">
+      <div class="road-line road-line-left"></div>
+      <div class="road-line road-line-right"></div>
+      <div class="road-dashes"></div>
+      <img src="/static/TRUCK1.png" class="road-truck truck-right">
+    </div>
+  </div>
+
+  <style>
+    .form-msg { margin-top: 10px; font-size: 14px; min-height: 20px; }
+    .form-msg.ok  { color: #1a7a1a; }
+    .form-msg.err { color: #cc0000; }
+    #s-profit.profit { color: #1a7a1a; font-weight: bold; }
+    #s-profit.loss   { color: #cc0000; font-weight: bold; }
+  </style>
+
+  <script>
+    // ── Dark mode ────────────────────────────────────────────────────────
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggle = document.getElementById("darkModeToggle");
+      if (localStorage.getItem("darkMode") === "on") {
+        document.body.classList.add("dark-mode");
+        toggle.checked = true;
+      }
+      toggle.addEventListener("change", function () {
+        document.body.classList.toggle("dark-mode", toggle.checked);
+        localStorage.setItem("darkMode", toggle.checked ? "on" : "off");
+      });
+
+      loadTrucks();
+      setDefaultWeeks();
+    });
+
+    // ── Scroll parallax ──────────────────────────────────────────────────
+    window.addEventListener("scroll", function () {
+      const y = window.scrollY;
+      const leftTruck  = document.querySelector(".truck-left");
+      const rightTruck = document.querySelector(".truck-right");
+      if (leftTruck)  leftTruck.style.transform  = "scaleY(-1) translateY(" + (y * 0.18) + "px)";
+      if (rightTruck) rightTruck.style.transform = "translateX(0) translateY(" + (y * -0.2) + "px)";
+      document.querySelectorAll(".road-dashes").forEach(function(d) {
+        d.style.backgroundPosition = "center " + (y * 0.35) + "px";
+      });
+    });
+
+    // ── Helpers ──────────────────────────────────────────────────────────
+    function fmt(n) { return '$' + parseFloat(n || 0).toFixed(2); }
+
+    function msg(id, text, ok) {
+      const el = document.getElementById(id);
+      el.textContent = text;
+      el.className = 'form-msg ' + (ok ? 'ok' : 'err');
+    }
+
+    function weekInputToKey(val) {
+      // input[type=week] gives "2026-W18" → we need "2026-W18"
+      // backend uses strftime('%Y-W%U') which is "2026-W18" style
+      if (!val) return '';
+      // Convert "2026-W18" → keep as-is (matches get_week_key format)
+      return val.replace('-W', '-W');
+    }
+
+    function setDefaultWeeks() {
+      fetch('/api/current-week')
+        .then(r => r.json())
+        .then(data => {
+          // Backend returns e.g. "2026-W18"; convert to "2026-W18" for input
+          const w = data.week; // e.g. "2026-W18"
+          const inputVal = w.replace('-W0', '-W').replace(/-W(\d)$/, '-W0$1');
+          // week input expects "2026-W18"
+          ['expenseWeek','incomeWeek','summaryWeek','pdfWeek'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.value = w; // browsers accept YYYY-Www
+          });
+        });
+    }
+
+    function populateSelects(trucks) {
+      ['expenseTruck','incomeTruck','summaryTruck','pdfTruck'].forEach(id => {
+        const sel = document.getElementById(id);
+        if (!sel) return;
+        const prev = sel.value;
+        sel.innerHTML = '<option value="">Select Truck</option>';
+        trucks.forEach(t => {
+          const opt = document.createElement('option');
+          opt.value = t;
+          opt.textContent = 'Truck ' + t;
+          sel.appendChild(opt);
+        });
+        if (prev) sel.value = prev;
+      });
+    }
+
+    function loadTrucks() {
+      fetch('/api/trucks')
+        .then(r => r.json())
+        .then(data => populateSelects(data.trucks || []));
+    }
+
+    // ── Add Truck ────────────────────────────────────────────────────────
+    function addTruck() {
+      const num = document.getElementById('truckNumber').value.trim();
+      fetch('/api/trucks', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({truck_number: num})
+      })
+      .then(r => r.json())
+      .then(data => {
+        msg('addTruckMsg', data.message, data.success);
+        if (data.success) {
+          document.getElementById('truckNumber').value = '';
+          loadTrucks();
+        }
+      });
+    }
+
+    // ── Save Expenses ────────────────────────────────────────────────────
+    function saveExpenses() {
+      const truck = document.getElementById('expenseTruck').value;
+      const week  = document.getElementById('expenseWeek').value;
+      if (!truck) { msg('expenseMsg','Please select a truck.',false); return; }
+      const payload = {
+        truck, week,
+        fuel:       document.getElementById('fuelCost').value      || 0,
+        repair:     document.getElementById('repairCost').value     || 0,
+        tolls:      document.getElementById('tolls').value          || 0,
+        insurance:  document.getElementById('insurance').value      || 0,
+        driver_pay: document.getElementById('driverPay').value      || 0,
+        other:      document.getElementById('otherExpenses').value  || 0,
+      };
+      fetch('/api/expenses', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(payload)
+      })
+      .then(r => r.json())
+      .then(data => msg('expenseMsg', data.message, data.success));
+    }
+
+    // ── Save Income ──────────────────────────────────────────────────────
+    function saveIncome() {
+      const truck  = document.getElementById('incomeTruck').value;
+      const week   = document.getElementById('incomeWeek').value;
+      const income = document.getElementById('weeklyIncome').value || 0;
+      if (!truck) { msg('incomeMsg','Please select a truck.',false); return; }
+      fetch('/api/income', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({truck, week, income})
+      })
+      .then(r => r.json())
+      .then(data => msg('incomeMsg', data.message, data.success));
+    }
+
+    // ── View Summary ─────────────────────────────────────────────────────
+    function viewSummary() {
+      const truck = document.getElementById('summaryTruck').value;
+      const week  = document.getElementById('summaryWeek').value;
+      if (!truck) { msg('summaryMsg','Please select a truck.',false); return; }
+      fetch(`/api/summary?truck=${encodeURIComponent(truck)}&week=${encodeURIComponent(week)}`)
+        .then(r => r.json())
+        .then(data => {
+          if (!data.success) { msg('summaryMsg', data.message, false); return; }
+          const d = data.data;
+          const e = d.expenses || {};
+          ['fuel','repair','tolls','insurance','driver_pay','other','total_expenses'].forEach(k => {
+            const el = document.getElementById('s-' + k);
+            if (el) el.innerHTML = fmt(e[k] || d[k] || 0);
+          });
+          document.getElementById('s-income').innerHTML = fmt(d.income);
+          const profitEl = document.getElementById('s-profit');
+          profitEl.innerHTML = fmt(Math.abs(d.profit)) + (d.profit < 0 ? ' (LOSS)' : ' (PROFIT)');
+          profitEl.className = d.profit >= 0 ? 'profit' : 'loss';
+          msg('summaryMsg', '', true);
+        });
+    }
+
+    // ── Generate PDF ─────────────────────────────────────────────────────
+    function generatePDF() {
+      const truck = document.getElementById('pdfTruck').value;
+      const week  = document.getElementById('pdfWeek').value;
+      if (!truck) { msg('pdfMsg','Please select a truck.',false); return; }
+      msg('pdfMsg','Generating…', true);
+      window.location.href = `/api/pdf?truck=${encodeURIComponent(truck)}&week=${encodeURIComponent(week)}`;
+      setTimeout(() => msg('pdfMsg','PDF downloaded!', true), 1500);
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report a Problem – Truck On Track</title>
+<link rel="stylesheet" href="/static/styles_simple.css">
+<link rel="stylesheet" href="/static/report.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-overlay"></div>
+  <div class="top-bar">
+    <div class="brand-badge">TOT</div>
+    <label class="theme-switch">
+      <input type="checkbox" id="darkModeToggle">
+      <span class="theme-slider">
+        <span class="theme-icon moon">🌙</span>
+        <span class="theme-icon sun">☀️</span>
+      </span>
+    </label>
+  </div>
+  <div class="hero-content">
+    <h1>Report a Problem</h1>
+    <p>Tell us what went wrong</p>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="card">
+    <div class="section-title-row">
+      <h2>Problem Form</h2>
+      <span class="section-tag">Support</span>
+    </div>
+
+    <div class="form-grid">
+      <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Your name" required>
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="your@email.com" required>
+      </div>
+      <div class="full-width">
+        <label for="title">Title</label>
+        <input type="text" id="title" placeholder="Brief summary of the issue">
+      </div>
+      <div class="full-width">
+        <label for="desc">Description</label>
+        <textarea id="desc" rows="5" placeholder="Describe the problem in detail…" required></textarea>
+      </div>
+      <div class="full-width">
+        <button onclick="submitReport()">Submit</button>
+      </div>
+    </div>
+
+    <p id="msg" class="form-msg"></p>
+  </section>
+
+  <button class="back-btn" onclick="window.location.href='/'">← Back</button>
+
+</main>
+
+<div class="road-side road-left">
+  <div class="road-inner">
+    <div class="road-line road-line-left"></div>
+    <div class="road-line road-line-right"></div>
+    <div class="road-dashes"></div>
+    <img src="/static/TRUCK1.png" class="road-truck truck-left">
+  </div>
+</div>
+<div class="road-side road-right">
+  <div class="road-inner">
+    <div class="road-line road-line-left"></div>
+    <div class="road-line road-line-right"></div>
+    <div class="road-dashes"></div>
+    <img src="/static/TRUCK1.png" class="road-truck truck-right">
+  </div>
+</div>
+
+<style>
+  .form-msg      { margin-top: 10px; font-size: 14px; min-height: 20px; }
+  .form-msg.ok   { color: #1a7a1a; }
+  .form-msg.err  { color: #cc0000; }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.getElementById("darkModeToggle");
+    if (localStorage.getItem("darkMode") === "on") {
+      document.body.classList.add("dark-mode");
+      toggle.checked = true;
+    }
+    toggle.addEventListener("change", function () {
+      document.body.classList.toggle("dark-mode", toggle.checked);
+      localStorage.setItem("darkMode", toggle.checked ? "on" : "off");
+    });
+  });
+
+  window.addEventListener("scroll", function () {
+    const y = window.scrollY;
+    const leftTruck  = document.querySelector(".truck-left");
+    const rightTruck = document.querySelector(".truck-right");
+    if (leftTruck)  leftTruck.style.transform  = "scaleY(-1) translateY(" + (y * 0.25) + "px)";
+    if (rightTruck) rightTruck.style.transform = "translateX(0) translateY(" + (y * -0.2) + "px)";
+    document.querySelectorAll(".road-dashes").forEach(function(d) {
+      d.style.backgroundPosition = "center " + (y * 0.35) + "px";
+    });
+  });
+
+  function submitReport() {
+    const name  = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const title = document.getElementById('title').value.trim();
+    const desc  = document.getElementById('desc').value.trim();
+    const msgEl = document.getElementById('msg');
+
+    if (!name || !email || !desc) {
+      msgEl.textContent = 'Name, email, and description are required.';
+      msgEl.className = 'form-msg err';
+      return;
+    }
+
+    msgEl.textContent = 'Submitting…';
+    msgEl.className = 'form-msg ok';
+
+    fetch('/api/report', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({name, email, title, description: desc})
+    })
+    .then(r => r.json())
+    .then(data => {
+      msgEl.textContent = data.success
+        ? '✓ Report submitted! A PDF has been saved on the server.'
+        : '✗ ' + data.message;
+      msgEl.className = 'form-msg ' + (data.success ? 'ok' : 'err');
+      if (data.success) {
+        document.getElementById('name').value  = '';
+        document.getElementById('email').value = '';
+        document.getElementById('title').value = '';
+        document.getElementById('desc').value  = '';
+      }
+    })
+    .catch(() => {
+      msgEl.textContent = 'Network error – please try again.';
+      msgEl.className = 'form-msg err';
+    });
+  }
+</script>
+
+</body>
+</html>
